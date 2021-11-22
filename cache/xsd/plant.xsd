@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--xmlns:xs can be any http. we just added a xmlschema link-->
+<!--targetNamespace=the target, where the schema will be generated-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"  targetNamespace="http://www.de.sick/plantManifest/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="plant">
+		<xs:annotation>
+			<xs:documentation>
+				Root Element
+			</xs:documentation>
+		</xs:annotation>
+	<!--XSD validation rules go instide this xs:element tag-->
+		<!--Complex type: made of several elements-->
+		<xs:complexType>
+			<!--Sequence means that the elements inside here has to follow in this specified order-->
+			<xs:sequence>
+				<!-- the element genus will be the type string with some validation rules-->
+				<!-- at this case, the type is beeing described inside the tag restriction-->
+				<xs:element name="genus">
+					<xs:annotation>
+						<xs:documentation>
+							Genus
+						</xs:documentation>
+					</xs:annotation>				
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="60"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="species" type="xs:string" minOccurs="0" default="spp."></xs:element>
+				<xs:element name="cultivar" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+							Variety
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="100"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="common_name" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+							The name in native language
+						</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="100"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="height" minOccurs="0" default="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:integer">
+						<!-- we can up to and include 100 value-->
+							<xs:maxInclusive value="100"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="begin_bloom_date" type="xs:date" minOccurs="0"></xs:element>
+				<xs:element name="end_bloom_date" type="xs:date" minOccurs="0"></xs:element>
+				<xs:element name="edible" type="xs:boolean" minOccurs="0"></xs:element>
+				<xs:element name="sun_tolerance" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="full_sun"></xs:enumeration>
+							<xs:enumeration value="part_sun"></xs:enumeration>
+							<xs:enumeration value="part_shade"></xs:enumeration>
+							<xs:enumeration value="full_shade"></xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="bloom_color" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="red"></xs:enumeration>
+							<xs:enumeration value="orange"></xs:enumeration>
+							<xs:enumeration value="yellow"></xs:enumeration>
+							<xs:enumeration value="blue"></xs:enumeration>
+							<xs:enumeration value="violet"></xs:enumeration>
+							<xs:enumeration value="white"></xs:enumeration>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element  name="specimens" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="specimen" type="specimenType" minOccurs="1" maxOccurs="unbounded">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Define a type to be used above-->
+	<xs:complexType name="specimenType">
+		<xs:sequence>
+			<xs:element name="latitude" type="xs:decimal" minOccurs="0"></xs:element>
+			<xs:element name="longitude" type="xs:decimal" minOccurs="0"></xs:element>
+				<xs:element name="planted_by" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="255"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="commens" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="1024"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
