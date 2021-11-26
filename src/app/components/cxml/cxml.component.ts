@@ -21,7 +21,6 @@ export class CxmlComponent implements OnInit {
 
     const parser = new Parser();
 
-    
     const result = parser.parse(plant, document);
 
     // const parser = new Parser();
@@ -30,8 +29,9 @@ export class CxmlComponent implements OnInit {
     // const result = parser.parse(example, document);
 
     debugger
-    console.log(result);
-
+    result.then((doc) => {
+      console.log(JSON.stringify(doc));
+    });
 
   }
 
