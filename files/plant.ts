@@ -1,5 +1,5 @@
 
-export const demo: string = `
+export const plant: string = `
 <?xml version="1.0" encoding="UTF-8"?>
 <plant>
 	<genus>Cercis</genus>

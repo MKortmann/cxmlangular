@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { Parser } from 'cxml';
 
-import { document as Document, PlantType,  specimenType  } from '../../../../xmlns/www.de.sick/plantManifest/XMLSchema';
+import { document  } from '../../../../xmlns/www.de.sick/plantManifest/XMLSchema';
 
-import { demo } from '../../../../files/plant';
+import { plant } from '../../../../files/plant';
+// import { document  } from '../../../../xmlns/dir-example';
+// import { example } from '../../../../files/example';
 
 @Component({
   selector: 'app-cxml',
@@ -19,8 +21,13 @@ export class CxmlComponent implements OnInit {
 
     const parser = new Parser();
 
-    debugger
-    const result = parser.parse(demo, Document);
+    
+    const result = parser.parse(plant, document);
+
+    // const parser = new Parser();
+
+    // debugger
+    // const result = parser.parse(example, document);
 
     debugger
     console.log(result);
